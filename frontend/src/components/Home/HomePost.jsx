@@ -47,8 +47,9 @@ const postActions = [
   },
 ];
 
-export default function HomePost() {
+export default function HomePost({ onPostCreated }) {
   const [content, setContent] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const remaining = maxLength - content.length;
   //   Algo made by IA
@@ -56,6 +57,37 @@ export default function HomePost() {
   const circumference = 2 * Math.PI * radius;
   const progress = content.length / maxLength;
   const offset = circumference * (1 - progress);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const trimmedContent = content.trim();
+    if (trimmedContent.length === 0 || isSubmitting) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      const response = await fetch("http://projet-x-api.local", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: trimmedContent,
+          user_id: 1,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Unable to create the post.");
+      }
+      const newPost = await response.json();
+      onPostCreated(newPost);
+      setContent("");
+    } catch (error) {
+      console.error("Post creattion error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
   return (
     <>
       <div className=" flex flex-1 gap-2 px-4 py-7 border-b border-neutral-700">
@@ -63,7 +95,7 @@ export default function HomePost() {
           src="/x_default_profile_picture.jpg"
           className="rounded-full w-13 h-13 shrink-0"
         />
-        <form className="flex-1 min-w-0">
+        <form className="flex-1 min-w-0" onSubmit={handleSubmit}>
           {/* Textarea to post */}
           <div className="border-b border-transparent focus-within:border-neutral-700 group">
             <textarea
@@ -146,10 +178,10 @@ export default function HomePost() {
                 {/* Post button */}
                 <button
                   type="submit"
-                  disabled={content.length === 0}
+                  disabled={content.trim().length === 0 || isSubmitting}
                   className="flex items-center justify-center font-semibold bg-white w-17 h-10 rounded-full text-black disabled:opacity-20"
                 >
-                  Post
+                  {isSubmitting ? "..." : "Post"}
                 </button>
               </div>
             </div>
@@ -157,7 +189,7 @@ export default function HomePost() {
         </form>
       </div>
       <div className="flex items-center justify-center border-b border-neutral-700 py-3">
-        <span className="text-sky-500">Show post</span>
+        <span className="text-sky-500">Show posts</span>
       </div>
     </>
   );

@@ -12,9 +12,7 @@ export default function RootLayout() {
           <Outlet />
         </main>
 
-        <aside className="w-80">
-          <RightPanel />
-        </aside>
+        <RightPanel />
       </div>
     </div>
   );

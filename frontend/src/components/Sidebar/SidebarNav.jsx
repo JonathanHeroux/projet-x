@@ -33,8 +33,8 @@ const navigation = [
   {
     label: "Follow",
     to: "/follow",
-    icon: HiUserAdd,
-    activeIcon: HiOutlineUserAdd,
+    icon: HiOutlineUserAdd,
+    activeIcon: HiUserAdd,
   },
   {
     label: "Chat",
