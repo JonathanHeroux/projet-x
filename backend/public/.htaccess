@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Serve existing files and directories directly
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirect other requests to the PHP router
+
+RewriteRule ^ index.php [QSA,L]

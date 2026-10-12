@@ -1,4 +1,5 @@
 import { IoClose } from "react-icons/io5";
+// Temporary news data displayed in the right panel
 const news = [
   {
     title: "Jennie's Cozy Instagram Story Sparks Mystery Man Theories",
@@ -31,6 +32,7 @@ const news = [
 export default function TodaysNews() {
   return (
     <section className="border border-neutral-800 py-3 rounded-2xl mt-4 overflow-hidden">
+      {/* Section header and close button */}
       <div className="flex items-center justify-between px-4 py-3">
         <h2 className="text-2xl font-bold">Today's News</h2>
         <button className="rounded-full p-2 transition-colors hover:bg-neutral-900">
@@ -38,6 +40,7 @@ export default function TodaysNews() {
         </button>
       </div>
       <div>
+        {/* Render each news article */}
         {news.map((newsItem) => {
           return (
             <article
@@ -46,6 +49,7 @@ export default function TodaysNews() {
             >
               <p className="font-bold leading-tight">{newsItem.title}</p>
               <div className="flex items-center">
+                {/* Display overlapping profile images */}
                 <div className="flex -space-x-2 pr-2">
                   {newsItem.images.map((image) => {
                     return (

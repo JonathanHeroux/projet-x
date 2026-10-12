@@ -1,4 +1,6 @@
 import Post from "./Post";
+import { useEffect, useState } from "react";
+import { apiFetch } from "../../services/api";
 
 // const posts = [
 //   {
@@ -40,6 +42,20 @@ import Post from "./Post";
 // ];
 
 export default function Feed({ posts, onPostDeleted, onPostUpdated }) {
+  const [currentUserId, setCurrentUserId] = useState(null);
+
+  useEffect(() => {
+    async function loadCurrentUser() {
+      const response = await apiFetch("/me");
+
+      if (response.ok) {
+        const user = await response.json();
+        setCurrentUserId(Number(user.id));
+      }
+    }
+
+    loadCurrentUser();
+  }, []);
   return (
     // Show post
     <div>
@@ -50,6 +66,7 @@ export default function Feed({ posts, onPostDeleted, onPostUpdated }) {
             post={post}
             onPostDeleted={onPostDeleted}
             onPostUpdated={onPostUpdated}
+            currentUserId={currentUserId}
           />
         );
       })}

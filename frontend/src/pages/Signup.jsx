@@ -7,34 +7,40 @@ import { useState } from "react";
 import CreateAccountModal from "../components/Modals/CreateAccountModal";
 
 export default function Signup() {
+  // Control the visibility of the account creation modal
   const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
   return (
     <>
       <div className="min-h-screen flex flex-col">
         <main className="flex flex-1 flex-col lg:flex-row">
-          <section className="flex flex-1 order-2 lg:order-1 items-center justify-center m-10  text-white">
-            <div className="flex flex-col gap-10">
-              <h1 className="text-5xl text-center lg:text-7xl font-bold whitespace-nowrap md:text-center md:text-5xl sm:text-center sm:text-5xl">
+          {/* Signup section */}
+          <section className="flex min-w-0 flex-1 order-2 lg:order-1 items-center justify-center mx-4 my-10 lg:m-10 text-white">
+            <div className="flex w-full max-w-90 flex-col gap-10">
+              <h1 className="text-4xl text-center font-bold sm:text-5xl lg:text-7xl">
                 Happening now.
               </h1>
+              {/* Registration options */}
               <div className="flex flex-col gap-5 items-center lg:items-start">
                 <Button icon={<FaGoogle />}>Sign up with Google</Button>
                 <Button icon={<FaApple />}>Sign up with Apple</Button>
-                <div className="flex items-center w-90 gap-2">
+                <div className="flex items-center w-full max-w-90 gap-2">
                   <div className="h-px flex-1 bg-neutral-700"></div>
-                  <span className="text-neutre-500 text-sm">or</span>
+                  <span className="text-neutral-500 text-sm">or</span>
                   <div className="h-px flex-1 bg-neutral-700"></div>
                 </div>
+                {/* Open the account creation modal */}
                 <Button onClick={() => setShowCreateAccountModal(true)}>
                   Create account
                 </Button>
+                {/* Render the modal only when its visibility state is true */}
                 {showCreateAccountModal && (
                   <CreateAccountModal
                     onClose={() => setShowCreateAccountModal(false)}
                   />
                 )}
               </div>
-              <div className="w-90">
+              {/* Legal information */}
+              <div className="w-full max-w-90">
                 <p className="text-neutral-500 text-sm text-center ">
                   By continuing, you agree to our{" "}
                   <a href="#" className="text-white">
@@ -51,7 +57,8 @@ export default function Signup() {
                   .
                 </p>
               </div>
-              <div className="w-90">
+              {/* Login navigation */}
+              <div className="w-full max-w-90">
                 <p className="text-neutral-500 text-sm text-center">
                   Have an account already?{" "}
                   <Link to="/Login" className="text-white">
@@ -61,12 +68,14 @@ export default function Signup() {
               </div>
             </div>
           </section>
+          {/* Branding section */}
           <section className="flex flex-1 order-1 lg:order-2 items-center justify-center">
             <Logo />
           </section>
         </main>
+        {/* Footer navigation */}
         <footer className=" flex justify-center m-3">
-          <nav className="text-center flex flex-row gap-2 text-neutral-400">
+          <nav className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-neutral-400 text-xs sm:text-sm">
             <Link to="/About">About</Link>
             <div>.</div>
             <Link to="/GetApp">Get App</Link>
