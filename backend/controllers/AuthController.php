@@ -291,7 +291,8 @@ public function profile(): void
     }
 
     // Save the image in the public uploads directory
-    $uploadDirectory = dirname(__DIR__) . "/public/uploads/avatars";
+    $uploadDirectory = getenv("AVATAR_UPLOAD_DIR")
+    ?: dirname(__DIR__) . "/public/uploads/avatars";
     error_log("Avatar upload directory: " . $uploadDirectory);
 
     if (!is_dir($uploadDirectory) && !mkdir($uploadDirectory, 0755, true)) {

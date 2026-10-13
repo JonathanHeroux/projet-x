@@ -6,13 +6,26 @@ import Post from "../components/Feed/Post";
 
 export default function PostDetail() {
   const { id } = useParams();
-
+  const [currentUserId, setCurrentUserId] = useState(null);
   const [post, setPost] = useState(null);
   const [replies, setReplies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function loadCurrentUser() {
+      const response = await apiFetch("/me");
+
+      if (response.ok) {
+        const user = await response.json();
+        setCurrentUserId(Number(user.id));
+      }
+    }
+
+    loadCurrentUser();
+  }, []);
 
   // Retrieve the original post and its replies
   useEffect(() => {
@@ -139,6 +152,7 @@ export default function PostDetail() {
       {/* Original post */}
       <Post
         post={post}
+        currentUserId={currentUserId}
         onPostDeleted={handlePostDeleted}
         onPostUpdated={handlePostUpdated}
         onReplyCreated={handleReplyCreated}
@@ -151,6 +165,7 @@ export default function PostDetail() {
             <Post
               key={reply.id}
               post={reply}
+              currentUserId={currentUserId}
               onPostDeleted={handlePostDeleted}
               onPostUpdated={handlePostUpdated}
               onReplyCreated={handleReplyCreated}

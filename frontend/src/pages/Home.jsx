@@ -15,8 +15,13 @@ export default function Home() {
   // Retrieve posts for the selected feed tab
   useEffect(() => {
     let cancelled = false;
+    if (activeTab === "Tech") {
+      setPosts([]);
+      setIsLoading(false);
+      return;
+    }
 
-    const endpoint = activeTab === "Following" ? "/posts/following" : "/posts";
+    const endpoint = activeTab === "For you" ? "/posts" : "/posts/following";
 
     setIsLoading(true);
 
