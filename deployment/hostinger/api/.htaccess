@@ -1,0 +1,8 @@
+# Il permet à Apache de rediriger les requêtes API vers index.php, sauf si le fichier ou le dossier demandé existe réellement.
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^ index.php [QSA,L]

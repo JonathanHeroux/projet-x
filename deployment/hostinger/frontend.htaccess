@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Laisser l'API PHP gérer ses propres routes
+RewriteRule ^api(/|$) - [L]
+
+# Laisser passer les fichiers et dossiers existants
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Les autres URL sont gérées par React Router
+RewriteRule ^ index.html [L]

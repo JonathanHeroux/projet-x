@@ -87,7 +87,7 @@ export const navigation = [
 
 export default function SidebarNav() {
   return (
-    <nav className="flex flex-col gap-4 mt-2 items-start">
+    <nav className="flex flex-col gap-2 mt-1 items-start">
       {navigation.map((navItem) => {
         const Icon = navItem.icon;
 
@@ -98,10 +98,10 @@ export default function SidebarNav() {
               key={navItem.to}
               type="button"
               title="Coming soon"
-              className="flex items-center gap-4 rounded-full pl-4 pr-8 py-3 hover:bg-neutral-900 transition-colors duration-200 cursor-default"
+              className="flex items-center gap-4 rounded-full pl-4 pr-8 py-2.5 hover:bg-neutral-900 transition-colors duration-200 cursor-default"
             >
-              <Icon className="text-3xl" />
-              <span className="text-2xl">{navItem.label}</span>
+              <Icon className="text-2xl" />
+              <span className="text-xl">{navItem.label}</span>
             </button>
           );
         }
@@ -109,7 +109,7 @@ export default function SidebarNav() {
         // Navigate only to implemented pages
         return (
           <NavLink
-            className="flex items-center gap-4 rounded-full pl-4 pr-8 py-3 hover:bg-neutral-900 transition-colors duration-200"
+            className="flex items-center gap-4 rounded-full pl-4 pr-8 py-2.5 hover:bg-neutral-900 transition-colors duration-200"
             key={navItem.to}
             to={navItem.to}
           >
@@ -121,7 +121,7 @@ export default function SidebarNav() {
 
               return (
                 <>
-                  <ActiveIcon className="text-3xl" />
+                  <ActiveIcon className="text-2xl" />
                   <span className="text-2xl">{navItem.label}</span>
                 </>
               );

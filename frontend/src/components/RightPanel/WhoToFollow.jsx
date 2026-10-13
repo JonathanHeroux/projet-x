@@ -3,17 +3,17 @@ const whoToFollow = [
   {
     name: "Jonathan Heroux",
     username: "@JonathanHeroux",
-    avatar: "/x_default_profile_picture.jpg",
+    avatar: "/uploads/avatars/fe34cd5bd3e3cfb3b3daa6c32642a688.jpg",
   },
   {
     name: "Elon Musk",
     username: "@ElonMusk",
-    avatar: "/x_default_profile_picture.jpg",
+    avatar: "/uploads/avatars/62925c3f3aab649e6bd3dbfdcf22161c.png",
   },
   {
     name: "Mark Zuckerberg",
     username: "@MarkZuckerberg",
-    avatar: "/x_default_profile_picture.jpg",
+    avatar: "/uploads/avatars/f33faa491745a4796765f9b445229529.png",
   },
 ];
 export default function WhoToFollow() {
@@ -27,7 +27,10 @@ export default function WhoToFollow() {
       {/* Render suggested user profiles */}
       {whoToFollow.map((whoToFollowItem) => {
         return (
-          <div className="flex flex-1 items-center min-w-0 hover:bg-neutral-900 py-3 px-3 cursor-pointer">
+          <div
+            key={whoToFollowItem.username}
+            className="flex flex-1 items-center min-w-0 hover:bg-neutral-900 py-3 px-3 cursor-pointer"
+          >
             {/* User avatar */}
             <img
               src={whoToFollowItem.avatar}

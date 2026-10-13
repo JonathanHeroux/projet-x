@@ -33,7 +33,7 @@ export default function Footer() {
         <div className="mt-10 h-px bg-neutral-700 w-80" />
       </div>
       <div className="px-3">
-        <nav className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-neutral-500">
+        <nav className="my-7 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-neutral-500">
           {/* Render the footer navigation links */}
           {footerLinks.map((footerItem) => {
             return (
